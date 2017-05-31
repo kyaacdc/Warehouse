@@ -1,0 +1,27 @@
+@(myForm: Form[Product])
+
+@main("Product form") {
+    <h1>Product form</h1>
+
+    @if(myForm.value().isPresent) {
+        <ul>
+            <li>ean - @myForm.value().get().ean</li>
+            <li>name - @myForm.value().get().name</li>
+            <li>description - @myForm.value().get().description</li>
+        </ul>
+    } else {
+        @helper.form(action = routes.ProductController.save()) {
+            <fieldset>
+                <legend>Product (@myForm("name").valueOr("Newww"))</legend>
+                @helper.inputText(myForm("ean"))
+                @helper.inputText(myForm("name"))
+                @helper.inputText(myForm("description"))
+            </fieldset>
+            <input type="submit" class="btn btn-primary" value="Save">
+
+            <a href="@routes.ProductController.list()" class="btn">Cancel</a>
+        }
+    }
+
+
+}

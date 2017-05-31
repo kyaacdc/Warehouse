@@ -1,0 +1,89 @@
+@import java.util
+@(products: util.List[Product])
+
+@main("ProductController catalogue") {
+
+    <h2>All products</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>EAN</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for(product <- products) {
+            <tr>
+                <td>
+                @product.ean
+                </td>
+                <td>
+                    <a href="@routes.ProductController.details(product.ean)">
+                    @product.name
+                    </a>
+                </td>
+                <td>
+                    @product.description
+                </td>
+                <td>
+                    <a href="@routes.ProductController.delete(product.ean)" class="btn">
+                        <i class="glyphicon-minus"></i> Delete
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <a href="@routes.ProductController.newProduct()" class="btn">
+        <i class="glyphicon-plus"></i> New product
+    </a>
+
+    @* Demo zipWithIndex *@
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>EAN</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Remove</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for((product, i) <- products.zipWithIndex) {
+            <tr>
+                <td>
+                @i
+                </td>
+                <td>
+                @product.ean
+                </td>
+                <td>
+                    <a href="@routes.ProductController.details(product.ean)">
+                    @product.name
+                    </a>
+                </td>
+                <td>
+                @product.description
+                </td>
+                <td>
+                    <a href="@routes.ProductController.delete(product.ean)" class="btn">
+                        <i class="glyphicon-minus"></i> Delete
+                    </a>
+                </td>
+                <td>
+                    <a href="@routes.ProductController.editProduct(product.ean)" class="btn">
+                        <i class="glyphicon-apple"></i> Edit product
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+}

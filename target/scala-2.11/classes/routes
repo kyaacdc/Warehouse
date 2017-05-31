@@ -1,0 +1,15 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /products/                  controllers.ProductController.list
+GET     /productsAsync/             controllers.ProductController.listAsync
+GET     /products/new               controllers.ProductController.newProduct
+GET     /products/edit              controllers.ProductController.editProduct(ean:String)
+GET     /products/:ean              controllers.ProductController.details(ean:String)
+POST    /products/                  controllers.ProductController.save
+GET     /product/delete/:ean        controllers.ProductController.delete(ean:String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
